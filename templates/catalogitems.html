@@ -1,0 +1,60 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+	<div class="row divider blue">
+		<div class="col-md-12"></div>
+	</div>
+
+			<h1>{{catalog_name}}</h1>
+
+				<div class="col-md-11 padding-none">
+					<a href="{{url_for('editCategory', category_name = catalog_name )}}">
+						Edit Category
+					</a>
+					|
+					<a href="{{url_for('deleteCategory', category_name = catalog_name )}}">
+						Delete Category
+					</a>
+				</div>
+
+
+<div class = 'flash'>
+		      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+
+        <ul>
+        {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+</div>
+	<div class="container">
+		<div class="row padding-bottom">
+			<div class="col-md-2">
+				<h2>Category</h2>
+				{% for category in categories %}
+					<a href = "{{url_for('catalogItems', category_name = category.name)}}">
+						<h3>{{category.name}}</h3>
+					</a>
+				{% endfor %}
+				<a href="{{url_for('newCategory')}}">
+					Add Category
+				</a>
+			</div>
+			<div class="col-md-6">
+				<h2>{{catalog_name}} Items</h2>
+				{% for item in items %}
+					<a href = "{{url_for('oneItem', item_name = item.name, category_name = catalog_name)}}">
+						<h3>{{item.name}}</h3>
+					</a>
+				{% endfor %}
+				<a href="{{url_for('newItem', category_name = catalog_name)}}">
+					Add Item
+				</a>
+			</div>
+		</div>
+	</div>
+{% endblock %}
