@@ -54,6 +54,6 @@ class CatalogItem(Base):
                 }
 
 
-engine = create_engine('postgresql://catalog:password/catalogitemswithusers.db')
+engine = create_engine("postgresql://catalog:password@/catalogitemswithusers")
 
 Base.metadata.create_all(engine)
